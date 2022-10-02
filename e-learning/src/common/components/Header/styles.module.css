@@ -1,0 +1,74 @@
+.navBar {
+    height: 10vh;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navBrand img {
+    width: 125px;
+    height: 45.45px;
+    object-fit: cover;
+}
+
+.navLink {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.navLink a {
+    display: block;
+    color: #000;
+    font-size: 1rem;
+    line-height: 22px;
+    font-weight: 400;
+    user-select: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 0;
+    transition: 0.5s all;
+}
+
+.navLink a.active {
+    border-bottom: 2px solid #5627ff;
+    color: #5627ff !important;
+}
+
+.navLink a:hover {
+    color: #5627ff;
+}
+
+@media screen and (max-width: 992px) {
+    .offCanvasBody {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        padding: 24px;
+    }
+
+    .offCanvasHeader {
+        padding: 24px;
+        justify-content: flex-end;
+    }
+
+    .offCanvasHeader button{
+        color: #000;
+    }
+
+    .navLink {
+        margin-left: 0 !important;
+        justify-content: unset !important;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    .navLink a {
+        font-weight: 700;
+        border: none !important;
+    }
+
+    .navLink .btnNav {
+        width: 100%;
+    }
+}
