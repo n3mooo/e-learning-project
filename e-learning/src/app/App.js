@@ -6,7 +6,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { AuthRoute } from "./Guard";
 
 const Header = lazy(() => import("common/components/Header"));
-const Home = lazy(() => import("features/home/components/HeroSection"));
+const Footer = lazy(() => import("common/components/Footer"));
+const Home = lazy(() => import("features/home/pages/Home"));
 const SignIn = lazy(() => import("features/authentication/pages/SignIn"));
 const SignUp = lazy(() => import("features/authentication/pages/SignUp"));
 
@@ -41,6 +42,7 @@ function App() {
 
                     <Redirect to='/' />
                 </Switch>
+                <Footer />
             </Suspense>
         </BrowserRouter>
     );

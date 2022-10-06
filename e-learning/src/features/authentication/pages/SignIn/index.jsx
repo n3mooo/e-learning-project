@@ -61,9 +61,9 @@ function SignIn() {
                                 "d-flex flex-column align-items-center align-self-center position-relative"
                             )}
                             onSubmit={formik.handleSubmit}>
-                            <h2 className='w-100 m-0'>Log in</h2>
+                            <h2 className='w-100 m-0 fadeInDown'>Log in</h2>
                             <div className='d-block w-100'>
-                                <Form.Group className='d-block'>
+                                <Form.Group className='d-block fadeInDown'>
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         name='taiKhoan'
@@ -89,7 +89,9 @@ function SignIn() {
                                     )}
                                 </Form.Group>
 
-                                <Form.Group className='d-block' style={{ marginTop: 16 }}>
+                                <Form.Group
+                                    className='d-block fadeInDown'
+                                    style={{ marginTop: 16, animationDelay: "200ms" }}>
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         name='matKhau'
@@ -116,9 +118,10 @@ function SignIn() {
 
                                 <Button
                                     className={clsx(
-                                        "btn btnPrimary btnBlue",
+                                        "btn btnPrimary btnBlue fadeInUp",
                                         styles.btnFormControl
                                     )}
+                                    style={{ animationDelay: "300ms" }}
                                     type='submit'
                                     disabled={loading}>
                                     {loading ? <Spinner animation='border' /> : "Submit"}
@@ -130,7 +133,9 @@ function SignIn() {
                                         {error}
                                     </Form.Text>
                                 )}
-                                <Form.Text style={{ marginTop: "32px" }}>
+                                <Form.Text
+                                    className='fadeInUp'
+                                    style={{ marginTop: "32px", animationDelay: "400ms" }}>
                                     Don't have an account?
                                     <button
                                         onClick={() => {
@@ -151,11 +156,7 @@ function SignIn() {
                         </Form>
                     </Col>
 
-                    <Col
-                        xs={12}
-                        lg={6}
-                        className='p-5'
-                        style={{ backgroundColor: "#3742FA", borderRadius: 20 }}>
+                    <Col xs={12} lg={6} className={clsx("fadeInRight", styles.imgBox)}>
                         <img src={imgLogin} alt='' />
                     </Col>
                 </Row>

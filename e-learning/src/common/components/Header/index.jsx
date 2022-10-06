@@ -78,9 +78,6 @@ function Header() {
                             <NavLink activeClassName={styles.active} to='/' exact>
                                 Home
                             </NavLink>
-                            <NavLink activeClassName={styles.active} to='/about'>
-                                About
-                            </NavLink>
                             <NavLink activeClassName={styles.active} to='/course'>
                                 Course
                             </NavLink>

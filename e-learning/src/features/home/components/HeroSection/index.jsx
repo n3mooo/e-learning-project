@@ -14,7 +14,7 @@ function HeroSection() {
                 <Row className={styles.wrapper}>
                     <Col xs={12} lg={6}>
                         <div className={styles.heroText}>
-                            <h1 className='fadeInLeft'>Learn to improve your skill</h1>
+                            <h1 className='fadeInLeft'>Grow your skills, Define Your Future</h1>
                             <p className='fadeInLeft' style={{ animationDelay: "200ms" }}>
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam
                                 voluptatem, deserunt maiores cum adipisci asperiores delectus
