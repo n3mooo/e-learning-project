@@ -10,6 +10,7 @@ import icon2 from "assets/icon2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useHistory } from "react-router-dom";
+import homeSlice from "features/home/homeSlice";
 
 function CourseSection(props) {
     const history = useHistory();
@@ -18,6 +19,7 @@ function CourseSection(props) {
     const [key, setKey] = useState(props.topics[0]?.maDanhMuc);
 
     const coursesOfTopic = useSelector((state) => state.home.coursesOfTopic);
+    const cart = useSelector((state) => state.home.cart);
 
     const fetchCoursesOfTopic = async () => {
         await dispatch(fetchCoursesOfTopicAction(key));
@@ -25,6 +27,10 @@ function CourseSection(props) {
 
     const fetchCourseDetail = async (id) => {
         await dispatch(fetchCourseDetailAction(id));
+    };
+
+    const addToCart = (item) => {
+        dispatch(homeSlice.actions.updateCart(item));
     };
 
     //render topic
@@ -56,6 +62,7 @@ function CourseSection(props) {
         }
 
         return coursesOfTopic?.map((item, index) => {
+            const foundCourse = cart?.findIndex((x) => x.maKhoaHoc === item.maKhoaHoc);
             return (
                 <Col xs={12} xl={6} className='g-4' key={index}>
                     <Card className={styles.card}>
@@ -83,9 +90,19 @@ function CourseSection(props) {
                                     }}>
                                     Detail
                                 </Button>
-                                <Button className={clsx("btn btnDark", styles.cardBtn)}>
-                                    Add to cart
-                                </Button>
+                                {foundCourse !== -1 ? (
+                                    <Button
+                                        className={clsx("btn btnPrimary", styles.cardBtn)}
+                                        onClick={() => console.log("Go to cart")}>
+                                        Go to cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        className={clsx("btn btnDark", styles.cardBtn)}
+                                        onClick={() => addToCart(item)}>
+                                        Add to cart
+                                    </Button>
+                                )}
                             </div>
                         </Card.Body>
                     </Card>

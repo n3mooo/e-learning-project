@@ -2,13 +2,23 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faAngleRight, faCalendarAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import homeSlice from "features/home/homeSlice";
 import React from "react";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 function CourseDetail() {
+    const dispatch = useDispatch();
     const courseDetail = useSelector((state) => state.home.courseDetail);
+    const cart = useSelector((state) => state.home.cart);
+
+    const addToCart = (item) => {
+        dispatch(homeSlice.actions.updateCart(item));
+    };
+
+    const foundCourse = cart?.findIndex((x) => x.maKhoaHoc === courseDetail.maKhoaHoc);
+
     return (
         <section className={styles.detail}>
             <Container>
@@ -109,7 +119,19 @@ function CourseDetail() {
                                     <div className={styles.content}>
                                         <span>Free</span>
                                         <div className={styles.action}>
-                                            <Button className='btn btnDark'>Add to cart</Button>
+                                            {foundCourse !== -1 ? (
+                                                <Button
+                                                    className='btn btnPrimary'
+                                                    onClick={() => console.log("Go to cart")}>
+                                                    Go to cart
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    className='btn btnDark'
+                                                    onClick={() => addToCart(courseDetail)}>
+                                                    Add to cart
+                                                </Button>
+                                            )}
                                             <Button className='btn btnOutline'>Buy now</Button>
                                         </div>
                                     </div>

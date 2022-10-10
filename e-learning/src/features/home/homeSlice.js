@@ -11,11 +11,31 @@ const initialState = {
     courses: null,
     coursesOfTopic: null,
     courseDetail: null,
+    cart: [],
 };
 
 const homeSlice = createSlice({
     name: "home",
     initialState: initialState,
+    reducers: {
+        updateCart(state, action) {
+            const cloneCart = [...state.cart];
+            const foundCourse = cloneCart.findIndex(
+                (item) => item.maKhoaHoc === action.payload.maKhoaHoc
+            );
+
+            if (foundCourse !== -1) {
+                cloneCart.splice(foundCourse, 1);
+            } else {
+                cloneCart.push(action.payload);
+            }
+            state.cart = cloneCart;
+        },
+
+        clearCart(state, action) {
+            state.cart = action.payload;
+        },
+    },
     extraReducers: {
         [fetchTopicsAction.fulfilled]: (state, action) => {
             state.topics = action.payload;

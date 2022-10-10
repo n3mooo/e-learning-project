@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useHistory } from "react-router-dom";
+import homeSlice from "features/home/homeSlice";
 
 function Course() {
     const history = useHistory();
@@ -22,6 +23,7 @@ function Course() {
     const topics = useSelector((state) => state.home.topics);
     const courses = useSelector((state) => state.home.courses);
     const coursesOfTopic = useSelector((state) => state.home.coursesOfTopic);
+    const cart = useSelector((state) => state.home.cart);
 
     const fetchCoursesOfTopic = async (k) => {
         await dispatch(fetchCoursesOfTopicAction(k));
@@ -37,6 +39,10 @@ function Course() {
 
     const fetchCourseDetail = async (id) => {
         await dispatch(fetchCourseDetailAction(id));
+    };
+
+    const addToCart = (item) => {
+        dispatch(homeSlice.actions.updateCart(item));
     };
 
     //render all course
@@ -58,6 +64,10 @@ function Course() {
                         </div>
                     ) : (
                         courses?.map((item, index) => {
+                            const foundCourse = cart?.findIndex(
+                                (x) => x.maKhoaHoc === item.maKhoaHoc
+                            );
+
                             return (
                                 <Col xs={12} sm={6} md={4} xl={3} className='g-4' key={index}>
                                     <Card className={styles.card}>
@@ -99,10 +109,25 @@ function Course() {
                                                     }}>
                                                     Detail
                                                 </Button>
-                                                <Button
-                                                    className={clsx("btn btnDark", styles.cardBtn)}>
-                                                    Add to cart
-                                                </Button>
+                                                {foundCourse !== -1 ? (
+                                                    <Button
+                                                        className={clsx(
+                                                            "btn btnPrimary",
+                                                            styles.cardBtn
+                                                        )}
+                                                        onClick={() => console.log("Go to cart")}>
+                                                        Go to cart
+                                                    </Button>
+                                                ) : (
+                                                    <Button
+                                                        className={clsx(
+                                                            "btn btnDark",
+                                                            styles.cardBtn
+                                                        )}
+                                                        onClick={() => addToCart(item)}>
+                                                        Add to cart
+                                                    </Button>
+                                                )}
                                             </div>
                                         </Card.Body>
                                     </Card>
@@ -138,6 +163,10 @@ function Course() {
                             </div>
                         ) : (
                             coursesOfTopic?.map((item, index) => {
+                                const foundCourse = cart?.findIndex(
+                                    (x) => x.maKhoaHoc === item.maKhoaHoc
+                                );
+
                                 return (
                                     <Col xs={12} sm={6} md={4} xl={3} className='g-4' key={index}>
                                         <Card className={styles.card}>
@@ -179,13 +208,27 @@ function Course() {
                                                         }}>
                                                         Detail
                                                     </Button>
-                                                    <Button
-                                                        className={clsx(
-                                                            "btn btnDark",
-                                                            styles.cardBtn
-                                                        )}>
-                                                        Add to cart
-                                                    </Button>
+                                                    {foundCourse !== -1 ? (
+                                                        <Button
+                                                            className={clsx(
+                                                                "btn btnPrimary",
+                                                                styles.cardBtn
+                                                            )}
+                                                            onClick={() =>
+                                                                console.log("Go to cart")
+                                                            }>
+                                                            Go to cart
+                                                        </Button>
+                                                    ) : (
+                                                        <Button
+                                                            className={clsx(
+                                                                "btn btnDark",
+                                                                styles.cardBtn
+                                                            )}
+                                                            onClick={() => addToCart(item)}>
+                                                            Add to cart
+                                                        </Button>
+                                                    )}
                                                 </div>
                                             </Card.Body>
                                         </Card>
