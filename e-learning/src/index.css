@@ -105,7 +105,7 @@ img {
 .btnOutline {
     color: #000 !important;
     background-color: transparent !important;
-    border-color: #000;
+    border: 1px solid #000 !important;
 }
 
 .btnOutline:hover,
@@ -113,7 +113,7 @@ img {
 .btnOutline:active {
     color: #5627ff !important;
     background-color: transparent !important;
-    border-color: #5627ff !important;
+    border: 1px solid #5627ff !important;
 }
 
 .btnDark {

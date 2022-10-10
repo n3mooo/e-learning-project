@@ -1,4 +1,4 @@
-import { fetchTopicsAction } from "features/home/action";
+import { fetchCoursesAction, fetchTopicsAction } from "features/home/action";
 import ContactSection from "features/home/components/ContactSection";
 import CourseSection from "features/home/components/CourseSection";
 import HeroSection from "features/home/components/HeroSection";
@@ -15,9 +15,13 @@ function Home() {
         await dispatch(fetchTopicsAction());
     };
 
+    const fetchCourses = async () => {
+        await dispatch(fetchCoursesAction());
+    };
+
     useEffect(() => {
         fetchTopics();
-
+        fetchCourses();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

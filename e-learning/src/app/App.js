@@ -7,9 +7,11 @@ import { AuthRoute } from "./Guard";
 
 const Header = lazy(() => import("common/components/Header"));
 const Footer = lazy(() => import("common/components/Footer"));
-const Home = lazy(() => import("features/home/pages/Home"));
 const SignIn = lazy(() => import("features/authentication/pages/SignIn"));
 const SignUp = lazy(() => import("features/authentication/pages/SignUp"));
+const Home = lazy(() => import("features/home/pages/Home"));
+const Course = lazy(() => import("features/home/components/Courses"));
+const Detail = lazy(() => import("features/home/components/CourseDetail"));
 
 function App() {
     const dispatch = useDispatch();
@@ -35,6 +37,8 @@ function App() {
                 <Header />
                 <Switch>
                     <Route path='/' component={Home} exact></Route>
+                    <Route path='/course' component={Course} redirectPath='/'></Route>
+                    <Route path='/detail/:alias' component={Detail} redirectPath='/'></Route>
                     <AuthRoute path='/signin' component={SignIn} redirectPath='/' />
                     <AuthRoute path='/signup' component={SignUp} redirectPath='/' />
 

@@ -6,8 +6,10 @@ import character from "assets/character.png";
 import note from "assets/note.png";
 import calendar from "assets/calendar.png";
 import write from "assets/write.png";
+import { useHistory } from "react-router-dom";
 
 function HeroSection() {
+    const history = useHistory();
     return (
         <section className={styles.heroSection}>
             <Container>
@@ -22,7 +24,8 @@ function HeroSection() {
                             </p>
                             <Button
                                 className={clsx("btn btnPrimary fadeInLeft")}
-                                style={{ animationDelay: "500ms" }}>
+                                style={{ animationDelay: "500ms" }}
+                                onClick={() => history.push("/course")}>
                                 Explore our courses
                             </Button>
                         </div>

@@ -3,14 +3,16 @@ import styles from "./style.module.css";
 import { Button, Card, Col, Container, Nav, Row, Spinner, Tab } from "react-bootstrap";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCoursesOfTopicAction } from "features/home/action";
+import { fetchCourseDetailAction, fetchCoursesOfTopicAction } from "features/home/action";
 import human from "assets/human.png";
 import icon1 from "assets/icon1.png";
 import icon2 from "assets/icon2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { useHistory } from "react-router-dom";
 
 function CourseSection(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const [key, setKey] = useState(props.topics[0]?.maDanhMuc);
@@ -19,6 +21,10 @@ function CourseSection(props) {
 
     const fetchCoursesOfTopic = async () => {
         await dispatch(fetchCoursesOfTopicAction(key));
+    };
+
+    const fetchCourseDetail = async (id) => {
+        await dispatch(fetchCourseDetailAction(id));
     };
 
     //render topic
@@ -69,7 +75,12 @@ function CourseSection(props) {
                             <Card.Title className={styles.cardTitle}>{item.tenKhoaHoc}</Card.Title>
                             <Card.Text className={styles.cardDesc}>{item.moTa}</Card.Text>
                             <div className='d-flex align-items-center flex-wrap justify-content-between'>
-                                <Button className={clsx("btn btnSecond", styles.cardBtn)}>
+                                <Button
+                                    className={clsx("btn btnSecond", styles.cardBtn)}
+                                    onClick={async () => {
+                                        await fetchCourseDetail(item.maKhoaHoc);
+                                        history.push("/detail/" + item.biDanh);
+                                    }}>
                                     Detail
                                 </Button>
                                 <Button className={clsx("btn btnDark", styles.cardBtn)}>
@@ -124,7 +135,8 @@ function CourseSection(props) {
                                 <div className='text-center'>
                                     <Button
                                         className='btn btnPrimary mt-4 text-center'
-                                        style={{ padding: "12px 20px" }}>
+                                        style={{ padding: "12px 20px" }}
+                                        onClick={() => history.push("/course")}>
                                         View All
                                     </Button>
                                 </div>

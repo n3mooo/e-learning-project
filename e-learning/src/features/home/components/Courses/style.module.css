@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap");
+
+.course {
+    padding: 10vh 0 3rem;
+    position: relative;
+}
+
+.text {
+    margin: 1.5rem 0;
+}
+
+.text h2 {
+    max-width: 80rem;
+    font-family: Sora, "sans-serif";
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.25;
+}
+
+.text p {
+    display: block;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.btnTab {
+    color: rgba(5, 6, 15, 0.6);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none !important;
+    transition: 0s all;
+}
+
+.btnTab:hover,
+.btnTab.active {
+    color: #000 !important;
+    border: none !important;
+}
+
+.card {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
+    border: none;
+    transition: 0.2s all;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.imgCard {
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    overflow: hidden;
+}
+
+.cardBody {
+    padding: 1rem;
+}
+
+.cardSubTitle p {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 5px;
+    cursor: default;
+}
+
+.cardTitle {
+    font-family: Inter, sans-serif;
+    color: #05060f;
+    line-height: 1.4em;
+    letter-spacing: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    cursor: default;
+}
+
+.cardDesc {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: rgba(5, 6, 15, 0.6);
+    font-size: 0.875rem;
+    line-height: 24px;
+    height: 50px;
+    text-overflow: ellipsis;
+}
+
+.cardBtn {
+    padding: 8px 20px;
+    font-size: 0.875rem !important;
+    min-height: 22px;
+}
+
+.imgSection {
+    animation: float 2s infinite;
+}
+
+.tabContent {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    padding: 0 1rem 1.5rem;
+    margin-top: 0.5rem;
+    min-height: 23.2em;
+}
+
+@media screen and (max-width: 768px) {
+    .text {
+        margin: 1rem 0;
+    }
+    
+    .text h2 {
+        font-size: 2.5rem;
+    }
+    
+    .text p {
+        display: block;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25;
+    }
+}
