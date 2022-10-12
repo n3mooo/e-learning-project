@@ -65,7 +65,7 @@ function CourseSection(props) {
             const foundCourse = cart?.findIndex((x) => x.maKhoaHoc === item.maKhoaHoc);
             return (
                 <Col xs={12} xl={6} className='g-4' key={index}>
-                    <Card className={styles.card}>
+                    <Card className={clsx(styles.card, styles.flag)}>
                         <Card.Img variant='top' src={item.hinhAnh} className={styles.imgCard} />
                         <Card.Body className={styles.cardBody}>
                             <Card.Subtitle
@@ -81,30 +81,34 @@ function CourseSection(props) {
                             </Card.Subtitle>
                             <Card.Title className={styles.cardTitle}>{item.tenKhoaHoc}</Card.Title>
                             <Card.Text className={styles.cardDesc}>{item.moTa}</Card.Text>
-                            <div className='d-flex align-items-center flex-wrap justify-content-between'>
-                                <Button
-                                    className={clsx("btn btnSecond", styles.cardBtn)}
-                                    onClick={async () => {
-                                        await fetchCourseDetail(item.maKhoaHoc);
-                                        history.push("/detail/" + item.biDanh);
-                                    }}>
-                                    Detail
-                                </Button>
-                                {foundCourse !== -1 ? (
-                                    <Button
-                                        className={clsx("btn btnPrimary", styles.cardBtn)}
-                                        onClick={() => console.log("Go to cart")}>
-                                        Go to cart
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        className={clsx("btn btnDark", styles.cardBtn)}
-                                        onClick={() => addToCart(item)}>
-                                        Add to cart
-                                    </Button>
-                                )}
-                            </div>
                         </Card.Body>
+                        <div
+                            className={clsx(
+                                "d-flex align-items-center flex-wrap justify-content-between w-100",
+                                styles.cartAction
+                            )}>
+                            <Button
+                                className={clsx("btn btnSecond", styles.cardBtn)}
+                                onClick={async () => {
+                                    await fetchCourseDetail(item.maKhoaHoc);
+                                    history.push("/detail/" + item.biDanh);
+                                }}>
+                                Detail
+                            </Button>
+                            {foundCourse !== -1 ? (
+                                <Button
+                                    className={clsx("btn btnPrimary", styles.cardBtn)}
+                                    onClick={() => console.log("Go to cart")}>
+                                    Go to cart
+                                </Button>
+                            ) : (
+                                <Button
+                                    className={clsx("btn btnDark", styles.cardBtn)}
+                                    onClick={() => addToCart(item)}>
+                                    Add to cart
+                                </Button>
+                            )}
+                        </div>
                     </Card>
                 </Col>
             );

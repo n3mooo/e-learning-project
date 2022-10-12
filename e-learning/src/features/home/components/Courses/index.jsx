@@ -69,8 +69,8 @@ function Course() {
                             );
 
                             return (
-                                <Col xs={12} sm={6} md={4} xl={3} className='g-4' key={index}>
-                                    <Card className={styles.card}>
+                                <Col xs={12} sm={6} lg={4} xl={3} className='g-4' key={index}>
+                                    <Card className={clsx(styles.card, styles.flag)}>
                                         <Card.Img
                                             variant='top'
                                             src={item.hinhAnh}
@@ -97,39 +97,37 @@ function Course() {
                                             <Card.Text className={styles.cardDesc}>
                                                 {item.moTa}
                                             </Card.Text>
-                                            <div className='d-flex align-items-center flex-wrap justify-content-between'>
+                                        </Card.Body>
+                                        <div
+                                            className={clsx(
+                                                "d-flex align-items-center flex-wrap justify-content-between w-100",
+                                                styles.cartAction
+                                            )}>
+                                            <Button
+                                                className={clsx("btn btnSecond", styles.cardBtn)}
+                                                onClick={async () => {
+                                                    await fetchCourseDetail(item.maKhoaHoc);
+                                                    history.push("/detail/" + item.biDanh);
+                                                }}>
+                                                Detail
+                                            </Button>
+                                            {foundCourse !== -1 ? (
                                                 <Button
                                                     className={clsx(
-                                                        "btn btnSecond",
+                                                        "btn btnPrimary",
                                                         styles.cardBtn
                                                     )}
-                                                    onClick={async () => {
-                                                        await fetchCourseDetail(item.maKhoaHoc);
-                                                        history.push("/detail/" + item.biDanh);
-                                                    }}>
-                                                    Detail
+                                                    onClick={() => console.log("Go to cart")}>
+                                                    Go to cart
                                                 </Button>
-                                                {foundCourse !== -1 ? (
-                                                    <Button
-                                                        className={clsx(
-                                                            "btn btnPrimary",
-                                                            styles.cardBtn
-                                                        )}
-                                                        onClick={() => console.log("Go to cart")}>
-                                                        Go to cart
-                                                    </Button>
-                                                ) : (
-                                                    <Button
-                                                        className={clsx(
-                                                            "btn btnDark",
-                                                            styles.cardBtn
-                                                        )}
-                                                        onClick={() => addToCart(item)}>
-                                                        Add to cart
-                                                    </Button>
-                                                )}
-                                            </div>
-                                        </Card.Body>
+                                            ) : (
+                                                <Button
+                                                    className={clsx("btn btnDark", styles.cardBtn)}
+                                                    onClick={() => addToCart(item)}>
+                                                    Add to cart
+                                                </Button>
+                                            )}
+                                        </div>
                                     </Card>
                                 </Col>
                             );
@@ -168,8 +166,8 @@ function Course() {
                                 );
 
                                 return (
-                                    <Col xs={12} sm={6} md={4} xl={3} className='g-4' key={index}>
-                                        <Card className={styles.card}>
+                                    <Col xs={12} sm={6} lg={4} xl={3} className='g-4' key={index}>
+                                        <Card className={clsx(styles.card, styles.flag)}>
                                             <Card.Img
                                                 variant='top'
                                                 src={item.hinhAnh}
@@ -196,41 +194,43 @@ function Course() {
                                                 <Card.Text className={styles.cardDesc}>
                                                     {item.moTa}
                                                 </Card.Text>
-                                                <div className='d-flex align-items-center flex-wrap justify-content-between'>
+                                            </Card.Body>
+                                            <div
+                                                className={clsx(
+                                                    "d-flex align-items-center flex-wrap justify-content-between w-100",
+                                                    styles.cartAction
+                                                )}>
+                                                <Button
+                                                    className={clsx(
+                                                        "btn btnSecond",
+                                                        styles.cardBtn
+                                                    )}
+                                                    onClick={async () => {
+                                                        await fetchCourseDetail(item.maKhoaHoc);
+                                                        history.push("/detail/" + item.biDanh);
+                                                    }}>
+                                                    Detail
+                                                </Button>
+                                                {foundCourse !== -1 ? (
                                                     <Button
                                                         className={clsx(
-                                                            "btn btnSecond",
+                                                            "btn btnPrimary",
                                                             styles.cardBtn
                                                         )}
-                                                        onClick={async () => {
-                                                            await fetchCourseDetail(item.maKhoaHoc);
-                                                            history.push("/detail/" + item.biDanh);
-                                                        }}>
-                                                        Detail
+                                                        onClick={() => console.log("Go to cart")}>
+                                                        Go to cart
                                                     </Button>
-                                                    {foundCourse !== -1 ? (
-                                                        <Button
-                                                            className={clsx(
-                                                                "btn btnPrimary",
-                                                                styles.cardBtn
-                                                            )}
-                                                            onClick={() =>
-                                                                console.log("Go to cart")
-                                                            }>
-                                                            Go to cart
-                                                        </Button>
-                                                    ) : (
-                                                        <Button
-                                                            className={clsx(
-                                                                "btn btnDark",
-                                                                styles.cardBtn
-                                                            )}
-                                                            onClick={() => addToCart(item)}>
-                                                            Add to cart
-                                                        </Button>
-                                                    )}
-                                                </div>
-                                            </Card.Body>
+                                                ) : (
+                                                    <Button
+                                                        className={clsx(
+                                                            "btn btnDark",
+                                                            styles.cardBtn
+                                                        )}
+                                                        onClick={() => addToCart(item)}>
+                                                        Add to cart
+                                                    </Button>
+                                                )}
+                                            </div>
                                         </Card>
                                     </Col>
                                 );
