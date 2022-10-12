@@ -132,14 +132,13 @@ function Header() {
                     <>
                         {cart?.map((item, index) => {
                             return (
-                                <>
+                                <div key={index}>
                                     <NavDropdown.Item
                                         to=''
                                         onClick={async () => {
                                             await fetchCourseDetail(item.maKhoaHoc);
                                             history.push("/detail/" + item.biDanh);
-                                        }}
-                                        key={index}>
+                                        }}>
                                         <div
                                             className={clsx(
                                                 "d-flex flex-row flex-nowrap gap-3",
@@ -160,7 +159,7 @@ function Header() {
                                         </div>
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                </>
+                                </div>
                             );
                         })}
                         <div className='w-100 text-center'>
@@ -201,14 +200,13 @@ function Header() {
                     <>
                         {cart?.map((item, index) => {
                             return (
-                                <>
+                                <div key={index}>
                                     <NavDropdown.Item
                                         to=''
                                         onClick={async () => {
                                             await fetchCourseDetail(item.maKhoaHoc);
                                             history.push("/detail/" + item.biDanh);
-                                        }}
-                                        key={index}>
+                                        }}>
                                         <div
                                             className={clsx(
                                                 "d-flex flex-row flex-nowrap gap-3",
@@ -229,7 +227,7 @@ function Header() {
                                         </div>
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                </>
+                                </div>
                             );
                         })}
                         <div className='w-100 text-center'>

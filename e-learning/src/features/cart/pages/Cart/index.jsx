@@ -157,7 +157,7 @@ function Cart() {
         <section className={styles.cart}>
             <Container>
                 <h3 className={clsx("py-4", styles.title)}>Shopping cart</h3>
-                <Row>
+                <Row style={{ minHeight: "32.5vh" }}>
                     {cart.length !== 0 ? (
                         renderCart()
                     ) : (
