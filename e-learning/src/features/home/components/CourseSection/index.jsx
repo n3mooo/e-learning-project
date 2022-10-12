@@ -98,7 +98,7 @@ function CourseSection(props) {
                             {foundCourse !== -1 ? (
                                 <Button
                                     className={clsx("btn btnPrimary", styles.cardBtn)}
-                                    onClick={() => console.log("Go to cart")}>
+                                    onClick={() => history.push("/cart")}>
                                     Go to cart
                                 </Button>
                             ) : (

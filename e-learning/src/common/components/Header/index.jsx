@@ -106,6 +106,145 @@ function Header() {
             </>
         );
     };
+
+    const renderPreCart = () => {
+        return (
+            <NavDropdown
+                title={
+                    <>
+                        <FontAwesomeIcon
+                            icon={faCartShopping}
+                            style={{ fontSize: "1.1rem" }}
+                            className={styles.iconCart}
+                        />
+                        <span
+                            className={clsx(styles.amountCart, {
+                                "d-none": cart.length === 0,
+                            })}>
+                            {cart.length > 9 ? "9+" : cart.length}
+                        </span>
+                    </>
+                }
+                className={clsx(styles.navDropdown, styles.cart)}>
+                {cart.length === 0 ? (
+                    <NavDropdown.Item>Your cart is empty</NavDropdown.Item>
+                ) : (
+                    <>
+                        {cart?.map((item, index) => {
+                            return (
+                                <>
+                                    <NavDropdown.Item
+                                        to=''
+                                        onClick={async () => {
+                                            await fetchCourseDetail(item.maKhoaHoc);
+                                            history.push("/detail/" + item.biDanh);
+                                        }}
+                                        key={index}>
+                                        <div
+                                            className={clsx(
+                                                "d-flex flex-row flex-nowrap gap-3",
+                                                styles.itemCart
+                                            )}>
+                                            <div
+                                                style={{
+                                                    height: "4rem",
+                                                    minWidth: "4rem",
+                                                }}>
+                                                <img src={item.hinhAnh} alt='' />
+                                            </div>
+
+                                            <div className={styles.text}>
+                                                <h3>{item.tenKhoaHoc}</h3>
+                                                <span>{item.nguoiTao.hoTen}</span>
+                                            </div>
+                                        </div>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                </>
+                            );
+                        })}
+                        <div className='w-100 text-center'>
+                            <Button
+                                className={clsx("btn btnDark", styles.btnCart)}
+                                onClick={() => history.push("/cart")}>
+                                Go to cart
+                            </Button>
+                        </div>
+                    </>
+                )}
+            </NavDropdown>
+        );
+    };
+
+    const renderCartToggle = () => {
+        return (
+            <NavDropdown
+                title={
+                    <>
+                        <FontAwesomeIcon
+                            icon={faCartShopping}
+                            style={{ fontSize: "1.1rem" }}
+                            className={styles.iconCart}
+                        />
+                        <span
+                            className={clsx(styles.amountCart, {
+                                "d-none": cart.length === 0,
+                            })}>
+                            {cart.length > 9 ? "9+" : cart.length}
+                        </span>
+                    </>
+                }
+                className={clsx(styles.navDropdown, styles.cartToggle)}>
+                {cart.length === 0 ? (
+                    <NavDropdown.Item>Your cart is empty</NavDropdown.Item>
+                ) : (
+                    <>
+                        {cart?.map((item, index) => {
+                            return (
+                                <>
+                                    <NavDropdown.Item
+                                        to=''
+                                        onClick={async () => {
+                                            await fetchCourseDetail(item.maKhoaHoc);
+                                            history.push("/detail/" + item.biDanh);
+                                        }}
+                                        key={index}>
+                                        <div
+                                            className={clsx(
+                                                "d-flex flex-row flex-nowrap gap-3",
+                                                styles.itemCart
+                                            )}>
+                                            <div
+                                                style={{
+                                                    height: "4rem",
+                                                    minWidth: "4rem",
+                                                }}>
+                                                <img src={item.hinhAnh} alt='' />
+                                            </div>
+
+                                            <div className={styles.text}>
+                                                <h3>{item.tenKhoaHoc}</h3>
+                                                <span>{item.nguoiTao.hoTen}</span>
+                                            </div>
+                                        </div>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                </>
+                            );
+                        })}
+                        <div className='w-100 text-center'>
+                            <Button
+                                className={clsx("btn btnDark", styles.btnCart)}
+                                onClick={() => history.push("/cart")}>
+                                Go to cart
+                            </Button>
+                        </div>
+                    </>
+                )}
+            </NavDropdown>
+        );
+    };
+
     return (
         <Navbar bg='light' expand='lg' fixed='top' className={styles.navBar}>
             <Container>
@@ -113,67 +252,7 @@ function Header() {
                     <img src={logo} alt='' />
                 </Link>
                 <div className='d-flex flex-row align-items-center' style={{ gap: 12 }}>
-                    <NavDropdown
-                        title={
-                            <>
-                                <FontAwesomeIcon
-                                    icon={faCartShopping}
-                                    style={{ fontSize: "1.1rem" }}
-                                    className={styles.iconCart}
-                                />
-                                <span
-                                    className={clsx(styles.amountCart, {
-                                        "d-none": cart.length === 0,
-                                    })}>
-                                    {cart.length > 9 ? "9+" : cart.length}
-                                </span>
-                            </>
-                        }
-                        className={clsx(styles.navDropdown, styles.cartToggle)}>
-                        {cart.length === 0 ? (
-                            <NavDropdown.Item>Your cart is empty</NavDropdown.Item>
-                        ) : (
-                            <>
-                                {cart?.map((item) => {
-                                    return (
-                                        <>
-                                            <NavDropdown.Item
-                                                to=''
-                                                onClick={async () => {
-                                                    await fetchCourseDetail(item.maKhoaHoc);
-                                                    history.push("/detail/" + item.biDanh);
-                                                }}>
-                                                <div
-                                                    className={clsx(
-                                                        "d-flex flex-row flex-nowrap gap-3",
-                                                        styles.itemCart
-                                                    )}>
-                                                    <div
-                                                        style={{
-                                                            height: "4rem",
-                                                            minWidth: "4rem",
-                                                        }}>
-                                                        <img src={item.hinhAnh} alt='' />
-                                                    </div>
-
-                                                    <div className={styles.text}>
-                                                        <h3>{item.tenKhoaHoc}</h3>
-                                                        <span>{item.nguoiTao.hoTen}</span>
-                                                    </div>
-                                                </div>
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Divider />
-                                        </>
-                                    );
-                                })}
-                                <div className='w-100 text-center'>
-                                    <Button className={clsx("btn btnDark", styles.btnCart)}>
-                                        Go to cart
-                                    </Button>
-                                </div>
-                            </>
-                        )}
-                    </NavDropdown>
+                    {renderCartToggle()}
                     <Navbar.Toggle aria-controls='narBar' className={styles.btnToggle}>
                         <FontAwesomeIcon icon={faBars} />
                     </Navbar.Toggle>
@@ -198,67 +277,7 @@ function Header() {
                         <Nav
                             className={clsx("justify-content-end", styles.navLink)}
                             style={{ gap: 12, height: "fit-content" }}>
-                            <NavDropdown
-                                title={
-                                    <>
-                                        <FontAwesomeIcon
-                                            icon={faCartShopping}
-                                            style={{ fontSize: "1.1rem" }}
-                                            className={styles.iconCart}
-                                        />
-                                        <span
-                                            className={clsx(styles.amountCart, {
-                                                "d-none": cart.length === 0,
-                                            })}>
-                                            {cart.length > 9 ? "9+" : cart.length}
-                                        </span>
-                                    </>
-                                }
-                                className={clsx(styles.navDropdown, styles.cart)}>
-                                {cart.length === 0 ? (
-                                    <NavDropdown.Item>Your cart is empty</NavDropdown.Item>
-                                ) : (
-                                    <>
-                                        {cart?.map((item) => {
-                                            return (
-                                                <>
-                                                    <NavDropdown.Item
-                                                        to=''
-                                                        onClick={async () => {
-                                                            await fetchCourseDetail(item.maKhoaHoc);
-                                                            history.push("/detail/" + item.biDanh);
-                                                        }}>
-                                                        <div
-                                                            className={clsx(
-                                                                "d-flex flex-row flex-nowrap gap-3",
-                                                                styles.itemCart
-                                                            )}>
-                                                            <div
-                                                                style={{
-                                                                    height: "4rem",
-                                                                    minWidth: "4rem",
-                                                                }}>
-                                                                <img src={item.hinhAnh} alt='' />
-                                                            </div>
-
-                                                            <div className={styles.text}>
-                                                                <h3>{item.tenKhoaHoc}</h3>
-                                                                <span>{item.nguoiTao.hoTen}</span>
-                                                            </div>
-                                                        </div>
-                                                    </NavDropdown.Item>
-                                                    <NavDropdown.Divider />
-                                                </>
-                                            );
-                                        })}
-                                        <div className='w-100 text-center'>
-                                            <Button className={clsx("btn btnDark", styles.btnCart)}>
-                                                Go to cart
-                                            </Button>
-                                        </div>
-                                    </>
-                                )}
-                            </NavDropdown>
+                            {renderPreCart()}
                             {renderUserInfo()}
                         </Nav>
                     </Offcanvas.Body>

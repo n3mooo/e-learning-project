@@ -117,7 +117,7 @@ function Course() {
                                                         "btn btnPrimary",
                                                         styles.cardBtn
                                                     )}
-                                                    onClick={() => console.log("Go to cart")}>
+                                                    onClick={() => history.push("/cart")}>
                                                     Go to cart
                                                 </Button>
                                             ) : (
@@ -217,7 +217,7 @@ function Course() {
                                                             "btn btnPrimary",
                                                             styles.cardBtn
                                                         )}
-                                                        onClick={() => console.log("Go to cart")}>
+                                                        onClick={() => history.push("/cart")}>
                                                         Go to cart
                                                     </Button>
                                                 ) : (

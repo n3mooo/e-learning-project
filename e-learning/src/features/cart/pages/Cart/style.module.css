@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap");
+
+.cart {
+    padding: 10vh 0 3rem;
+    position: relative;
+}
+
+.title {
+    color: #000;
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: Sora, "sans-serif";
+}
+
+.content {
+    width: 100%;
+}
+
+.content .item {
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    padding: 1rem 0.3rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+}
+
+.content .item img {
+    height: 100%;
+    max-width: 200px;
+    max-height: 93px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.rate span {
+    margin-right: 0.5rem;
+    line-height: 1rem;
+    height: 1rem;
+    font-size: 0.875rem;
+}
+
+.rate .iconStar {
+    color: #f5c418;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    font-size: 0.875rem;
+}
+
+.text {
+    cursor: pointer;
+}
+
+.text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.btnRemove {
+    padding: 8px 20px;
+    font-size: 0.875rem !important;
+    min-height: 22px;
+}
+
+.sideContent p {
+    margin-bottom: 1rem;
+}
+
+.sideContent h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 576px) {
+    .content .item img {
+        max-height: 80px;
+    }
+}
