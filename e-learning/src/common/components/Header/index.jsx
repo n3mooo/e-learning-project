@@ -42,7 +42,7 @@ function Header() {
                             <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: "1.3rem" }} />
                         }
                         className={styles.navDropdown}>
-                        <NavDropdown.Item to='/user'>
+                        <NavDropdown.Item onClick={() => history.push("/user")}>
                             <div className='d-flex flex-column'>
                                 <p className='m-0'>{userProfile.hoTen}</p>
                                 <span
@@ -60,12 +60,32 @@ function Header() {
                         </NavDropdown.Item>
 
                         <NavDropdown.Divider />
-                        <NavDropdown.Item to='/user'>My profile</NavDropdown.Item>
-                        <NavDropdown.Item to='#action/3.2'>My cart</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item to='' onClick={handleLogOut}>
-                            Log out
+                        <NavDropdown.Item onClick={() => history.push("/user")}>
+                            My profile
                         </NavDropdown.Item>
+                        <NavDropdown.Item
+                            className='d-flex flex-row justify-content-between align-items-center'
+                            onClick={() => history.push("/cart")}>
+                            <div>My cart</div>
+                            <span
+                                className={clsx({
+                                    "d-none": cart.length === 0,
+                                })}
+                                style={{
+                                    backgroundColor: "#f06a2b",
+                                    fontSize: "0.7rem",
+                                    width: "1rem",
+                                    height: "1rem",
+                                    lineHeight: "1rem",
+                                    textAlign: "center",
+                                    borderRadius: "50%",
+                                    color: "#fff",
+                                }}>
+                                {cart.length > 9 ? "9+" : cart.length}
+                            </span>
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={handleLogOut}>Log out</NavDropdown.Item>
                     </NavDropdown>
                     <div className={styles.navToggle}>
                         <NavLink to='/user'>
@@ -86,7 +106,7 @@ function Header() {
                             </div>
                         </NavLink>
                         <NavLink
-                            to=''
+                            to='/'
                             className={clsx("btn btnPrimary btnSecond mt-3", styles.btnNav)}
                             onClick={handleLogOut}>
                             Log out
@@ -134,7 +154,6 @@ function Header() {
                             return (
                                 <div key={index}>
                                     <NavDropdown.Item
-                                        to=''
                                         onClick={async () => {
                                             await fetchCourseDetail(item.maKhoaHoc);
                                             history.push("/detail/" + item.biDanh);
@@ -202,7 +221,6 @@ function Header() {
                             return (
                                 <div key={index}>
                                     <NavDropdown.Item
-                                        to=''
                                         onClick={async () => {
                                             await fetchCourseDetail(item.maKhoaHoc);
                                             history.push("/detail/" + item.biDanh);

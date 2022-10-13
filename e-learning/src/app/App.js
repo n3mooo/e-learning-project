@@ -13,6 +13,7 @@ const Home = lazy(() => import("features/home/pages/Home"));
 const Course = lazy(() => import("features/home/components/Courses"));
 const Detail = lazy(() => import("features/home/components/CourseDetail"));
 const Cart = lazy(() => import("features/cart/pages/Cart"));
+const User = lazy(() => import("features/user/pages/User"));
 
 function App() {
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/course' component={Course} redirectPath='/'></Route>
                     <Route path='/detail/:alias' component={Detail} redirectPath='/'></Route>
                     <Route path='/cart' component={Cart} redirectPath='/'></Route>
+                    <Route path='/user' component={User} redirectPath='/'></Route>
                     <AuthRoute path='/signin' component={SignIn} redirectPath='/' />
                     <AuthRoute path='/signup' component={SignUp} redirectPath='/' />
 

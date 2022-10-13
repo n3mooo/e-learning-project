@@ -108,9 +108,7 @@ img {
     border: 1px solid #000 !important;
 }
 
-.btnOutline:hover,
-.btnOutline:focus,
-.btnOutline:active {
+.btnOutline:hover {
     color: #5627ff !important;
     background-color: transparent !important;
     border: 1px solid #5627ff !important;
@@ -121,9 +119,7 @@ img {
     background-color: #05060f !important;
 }
 
-.btnDark:hover,
-.btnDark:focus,
-.btnDark:active {
+.btnDark:hover {
     color: #fff !important;
     background-color: rgba(5, 6, 15, 0.8) !important;
 }
@@ -133,9 +129,7 @@ img {
     background-color: #5627ff !important;
 }
 
-.btnPrimary:hover,
-.btnPrimary:focus,
-.btnPrimary:active {
+.btnPrimary:hover {
     color: #fff !important;
     background-color: #664eff !important;
 }
@@ -145,9 +139,7 @@ img {
     background-color: #f3f3f3 !important;
 }
 
-.btnSecond:hover,
-.btnSecond:focus,
-.btnSecond:active {
+.btnSecond:hover {
     color: #000 !important;
     background-color: rgba(5, 6, 15, 0.08) !important;
 }
@@ -187,6 +179,71 @@ img {
     margin: 0 auto 1.2rem;
     max-width: 424px;
     line-height: 24px;
+}
+
+.slick-arrow {
+    border-radius: 50%;
+    font-size: 24px;
+    height: 47px;
+    line-height: 1;
+    padding: 11px 0;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 300ms;
+    width: 47px;
+    z-index: 3;
+    position: absolute;
+    background-color: #1c1d1f;
+    border: 1px solid #6a6f73;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+    color: #fff;
+}
+
+.slick-arrow::before {
+    content: "";
+}
+
+.slick-arrow:hover {
+    background-color: #393b3f !important;
+    color: #fff !important;
+}
+
+.slick-next {
+    right: -15px;
+    padding-left: 2px;
+    padding-right: 0;
+}
+
+.slick-prev {
+    left: -15px;
+    padding-right: 2px;
+    padding-left: 0;
+}
+
+.slick-disabled {
+    display: none !important;
+}
+
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+    color: #fff;
+    outline: none;
+    background: #000;
+}
+
+.slick-slider {
+    padding: 0;
+}
+
+.slick-slide {
+    line-height: 0;
+}
+
+.slick-dots {
+    position: unset;
 }
 
 /* Animation */
@@ -321,4 +378,13 @@ img {
     }
 }
 
+@media screen and (max-width: 488px) {
+    .slick-prev,
+    .slick-next {
+        display: none !important;
+    }
+}
+
 @import "bootstrap/dist/css/bootstrap.min.css";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";

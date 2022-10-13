@@ -1,27 +1,92 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 import emptyCart from "assets/empty-shopping-cart-v2.jpg";
 import { useHistory } from "react-router-dom";
 import homeSlice from "features/home/homeSlice";
 import { fetchCourseDetailAction } from "features/home/action";
+import Slider from "react-slick";
 
 function Cart() {
     const history = useHistory();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.home.cart);
+    const courses = useSelector((state) => state.home.courses);
+
+    const fetchCourseDetail = async (id) => {
+        await dispatch(fetchCourseDetailAction(id));
+    };
+
+    const addToCart = (item) => {
+        dispatch(homeSlice.actions.updateCart(item));
+    };
 
     const removeFromCart = (item) => {
         dispatch(homeSlice.actions.updateCart(item));
     };
 
-    const fetchCourseDetail = async (id) => {
-        await dispatch(fetchCourseDetailAction(id));
+    const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+        <button
+            {...props}
+            className={clsx("slick-prev slick-arrow", {
+                "slick-disabled": currentSlide === 0,
+            })}
+            aria-hidden='true'
+            aria-disabled={currentSlide === 0 ? true : false}
+            type='button'>
+            <FontAwesomeIcon icon={faAngleLeft} />
+        </button>
+    );
+
+    const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+        <button
+            {...props}
+            className={clsx("slick-next slick-arrow", {
+                "slick-disabled": { ...props }.onClick === null,
+            })}
+            aria-hidden='true'
+            aria-disabled={{ ...props }.onClick === null ? true : false}
+            type='button'>
+            <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+    );
+
+    const settings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        nextArrow: <SlickArrowRight />,
+        prevArrow: <SlickArrowLeft />,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 488,
+                settings: {
+                    slidesToShow: 1.5,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     const renderCart = () => {
@@ -29,7 +94,7 @@ function Cart() {
             <>
                 <Col xs={12} lg={9}>
                     <div className={styles.content}>
-                        <p>{cart.length} Course in Cart</p>
+                        <p className='m-0'>{cart.length} Course in Cart</p>
                         <Container>
                             {cart.map((item, index) => {
                                 return (
@@ -149,6 +214,81 @@ function Cart() {
                         <Button className='btn btnPrimary w-100'>Check out</Button>
                     </div>
                 </Col>
+                <div className='mt-5 p-0 w-100'>
+                    <p style={{ margin: "0 0 0 12px" }}>You might also like</p>
+                    <Slider {...settings} className={styles.slider}>
+                        {courses?.slice(0, 8).map((item, index) => {
+                            const foundCourse = cart?.findIndex(
+                                (x) => x.maKhoaHoc === item.maKhoaHoc
+                            );
+
+                            return (
+                                <div key={index}>
+                                    <Card
+                                        className={clsx("d-block my-4", styles.card, styles.flag)}>
+                                        <Card.Img
+                                            variant='top'
+                                            src={item.hinhAnh}
+                                            className={styles.imgCard}
+                                        />
+                                        <Card.Body className={styles.cardBody}>
+                                            <Card.Subtitle
+                                                className={clsx(
+                                                    "d-flex align-items-center justify-content-between",
+                                                    styles.cardSubTitle
+                                                )}>
+                                                <p>{item.ngayTao}</p>
+                                                <p>
+                                                    <FontAwesomeIcon
+                                                        icon={faEye}
+                                                        className='me-1'
+                                                    />
+                                                    {item.luotXem}
+                                                </p>
+                                            </Card.Subtitle>
+                                            <Card.Title className={styles.cardTitle}>
+                                                {item.tenKhoaHoc}
+                                            </Card.Title>
+                                            <Card.Text className={styles.cardDesc}>
+                                                {item.moTa}
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <div
+                                            className={clsx(
+                                                "d-flex align-items-center flex-wrap justify-content-between w-100",
+                                                styles.cartAction
+                                            )}>
+                                            <Button
+                                                className={clsx("btn btnSecond", styles.cardBtn)}
+                                                onClick={async () => {
+                                                    await fetchCourseDetail(item.maKhoaHoc);
+                                                    history.push("/detail/" + item.biDanh);
+                                                }}>
+                                                Detail
+                                            </Button>
+                                            {foundCourse !== -1 ? (
+                                                <Button
+                                                    className={clsx(
+                                                        "btn btnOutline",
+                                                        styles.cardBtn
+                                                    )}
+                                                    onClick={() => removeFromCart(item)}>
+                                                    Remove
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    className={clsx("btn btnDark", styles.cardBtn)}
+                                                    onClick={() => addToCart(item)}>
+                                                    Add to cart
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </Card>
+                                </div>
+                            );
+                        })}
+                    </Slider>
+                </div>
             </>
         );
     };
@@ -157,7 +297,7 @@ function Cart() {
         <section className={styles.cart}>
             <Container>
                 <h3 className={clsx("py-4", styles.title)}>Shopping cart</h3>
-                <Row style={{ minHeight: "32.5vh" }}>
+                <Row>
                     {cart.length !== 0 ? (
                         renderCart()
                     ) : (
