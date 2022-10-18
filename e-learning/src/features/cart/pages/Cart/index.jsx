@@ -3,31 +3,45 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 import emptyCart from "assets/empty-shopping-cart-v2.jpg";
 import { useHistory } from "react-router-dom";
-import homeSlice from "features/home/homeSlice";
 import { fetchCourseDetailAction } from "features/home/action";
 import Slider from "react-slick";
+import { subscribeCourseAction } from "features/cart/action";
+import cartSlice from "features/cart/cartSlice";
 
 function Cart() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const cart = useSelector((state) => state.home.cart);
+    const cart = useSelector((state) => state.cart.cart);
+    const { loading } = useSelector((state) => state.cart);
     const courses = useSelector((state) => state.home.courses);
+    const profile = useSelector((state) => state.auth.profile);
 
     const fetchCourseDetail = async (id) => {
         await dispatch(fetchCourseDetailAction(id));
     };
 
     const addToCart = (item) => {
-        dispatch(homeSlice.actions.updateCart(item));
+        dispatch(cartSlice.actions.updateCart(item));
     };
 
     const removeFromCart = (item) => {
-        dispatch(homeSlice.actions.updateCart(item));
+        dispatch(cartSlice.actions.updateCart(item));
+    };
+
+    const subscribeCourse = async () => {
+        await cart.map(async (item) => {
+            const data = {
+                maKhoaHoc: item.maKhoaHoc,
+                taiKhoan: profile.taiKhoan,
+            };
+            await dispatch(subscribeCourseAction(data));
+            removeFromCart(item);
+        });
     };
 
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -94,7 +108,7 @@ function Cart() {
             <>
                 <Col xs={12} lg={9}>
                     <div className={styles.content}>
-                        <p className='m-0'>{cart.length} Course in Cart</p>
+                        <p className='m-0'>{cart?.length} Course in Cart</p>
                         <Container>
                             {cart.map((item, index) => {
                                 return (
@@ -128,7 +142,7 @@ function Cart() {
                                                     By {item.nguoiTao.hoTen}
                                                 </span>
                                                 <div
-                                                    className='d-flex align-items-center gap-4 fadeInUP'
+                                                    className='d-flex align-items-center justify-content-between justify-content-sm-start gap-sm-4 fadeInUP'
                                                     style={{
                                                         animationDelay: "200ms",
                                                     }}>
@@ -159,7 +173,7 @@ function Cart() {
                                                             className={styles.iconStar}
                                                         />
                                                     </div>
-                                                    <div>
+                                                    <div className='d-flex flex-row flex-nowrap align-items-center'>
                                                         <FontAwesomeIcon
                                                             icon={faEye}
                                                             className='me-1'
@@ -211,7 +225,29 @@ function Cart() {
                     <div className={styles.sideContent}>
                         <p>Total:</p>
                         <h2>$0</h2>
-                        <Button className='btn btnPrimary w-100'>Check out</Button>
+                        <Button
+                            className='btn btnPrimary w-100'
+                            onClick={async () => {
+                                if (!localStorage.getItem("token")) {
+                                    history.push("/signin");
+                                } else {
+                                    await subscribeCourse();
+                                }
+                            }}
+                            disabled={loading}>
+                            {loading ? (
+                                <Spinner
+                                    animation='border'
+                                    style={{
+                                        width: "1rem",
+                                        height: "1rem",
+                                        borderWidth: "0.2em",
+                                    }}
+                                />
+                            ) : (
+                                "Subscribe"
+                            )}
+                        </Button>
                     </div>
                 </Col>
                 <div className='mt-5 p-0 w-100'>
@@ -279,7 +315,7 @@ function Cart() {
                                                 <Button
                                                     className={clsx("btn btnDark", styles.cardBtn)}
                                                     onClick={() => addToCart(item)}>
-                                                    Add to cart
+                                                    Add
                                                 </Button>
                                             )}
                                         </div>
@@ -295,10 +331,10 @@ function Cart() {
 
     return (
         <section className={styles.cart}>
-            <Container>
-                <h3 className={clsx("py-4", styles.title)}>Shopping cart</h3>
+            <Container className='position-relative'>
+                <h3 className={clsx("py-4 d-inline-block", styles.title)}>Shopping cart</h3>
                 <Row>
-                    {cart.length !== 0 ? (
+                    {cart?.length !== 0 ? (
                         renderCart()
                     ) : (
                         <Col>
@@ -327,7 +363,7 @@ function Cart() {
                                                 </p>
                                                 <Button
                                                     className='btn btnPrimary mb-4 gap-sm-0 gap-2'
-                                                    onClick={() => history.push("/course")}>
+                                                    onClick={() => history.push("/courses")}>
                                                     Keep shopping
                                                 </Button>
                                             </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row, Spinner, Tab, Tabs } from "react-bootstrap";
 import styles from "./style.module.css";
-// import human3 from "assets/human3.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
     fetchCourseDetailAction,
@@ -13,7 +12,7 @@ import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useHistory } from "react-router-dom";
-import homeSlice from "features/home/homeSlice";
+import cartSlice from "features/cart/cartSlice";
 
 function Course() {
     const history = useHistory();
@@ -23,7 +22,7 @@ function Course() {
     const topics = useSelector((state) => state.home.topics);
     const courses = useSelector((state) => state.home.courses);
     const coursesOfTopic = useSelector((state) => state.home.coursesOfTopic);
-    const cart = useSelector((state) => state.home.cart);
+    const cart = useSelector((state) => state.cart.cart);
 
     const fetchCoursesOfTopic = async (k) => {
         await dispatch(fetchCoursesOfTopicAction(k));
@@ -42,7 +41,7 @@ function Course() {
     };
 
     const addToCart = (item) => {
-        dispatch(homeSlice.actions.updateCart(item));
+        dispatch(cartSlice.actions.updateCart(item));
     };
 
     //render all course
@@ -75,6 +74,11 @@ function Course() {
                                             variant='top'
                                             src={item.hinhAnh}
                                             className={styles.imgCard}
+                                            onError={({ currentTarget }) => {
+                                                currentTarget.onerror = null; // prevents looping
+                                                currentTarget.src =
+                                                    "https://elearningnew.cybersoft.edu.vn/hinhanh/hoc-ve-lap-trinh-web-123_gp01.jpg";
+                                            }}
                                         />
                                         <Card.Body className={styles.cardBody}>
                                             <Card.Subtitle
@@ -172,6 +176,11 @@ function Course() {
                                                 variant='top'
                                                 src={item.hinhAnh}
                                                 className={styles.imgCard}
+                                                onError={({ currentTarget }) => {
+                                                    currentTarget.onerror = null; // prevents looping
+                                                    currentTarget.src =
+                                                        "https://elearningnew.cybersoft.edu.vn/hinhanh/hoc-ve-lap-trinh-web-123_gp01.jpg";
+                                                }}
                                             />
                                             <Card.Body className={styles.cardBody}>
                                                 <Card.Subtitle

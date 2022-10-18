@@ -10,7 +10,7 @@ import icon2 from "assets/icon2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useHistory } from "react-router-dom";
-import homeSlice from "features/home/homeSlice";
+import cartSlice from "features/cart/cartSlice";
 
 function CourseSection(props) {
     const history = useHistory();
@@ -19,7 +19,7 @@ function CourseSection(props) {
     const [key, setKey] = useState(props.topics[0]?.maDanhMuc);
 
     const coursesOfTopic = useSelector((state) => state.home.coursesOfTopic);
-    const cart = useSelector((state) => state.home.cart);
+    const cart = useSelector((state) => state.cart.cart);
 
     const fetchCoursesOfTopic = async () => {
         await dispatch(fetchCoursesOfTopicAction(key));
@@ -30,7 +30,7 @@ function CourseSection(props) {
     };
 
     const addToCart = (item) => {
-        dispatch(homeSlice.actions.updateCart(item));
+        dispatch(cartSlice.actions.updateCart(item));
     };
 
     //render topic
@@ -157,7 +157,7 @@ function CourseSection(props) {
                                     <Button
                                         className='btn btnPrimary mt-4 text-center'
                                         style={{ padding: "12px 20px" }}
-                                        onClick={() => history.push("/course")}>
+                                        onClick={() => history.push("/courses")}>
                                         View All
                                     </Button>
                                 </div>

@@ -25,7 +25,7 @@ function HeroSection() {
                             <Button
                                 className={clsx("btn btnPrimary fadeInLeft")}
                                 style={{ animationDelay: "500ms" }}
-                                onClick={() => history.push("/course")}>
+                                onClick={() => history.push("/courses")}>
                                 Explore our courses
                             </Button>
                         </div>

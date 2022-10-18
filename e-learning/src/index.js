@@ -5,12 +5,16 @@ import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "app/Store";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "common/utils/ErrorFallback";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <App />
+            </ErrorBoundary>
         </Provider>
     </React.StrictMode>
 );

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { editProfileAction } from "features/profile/action";
 import { signInAction, signUpAction } from "./action";
 
 const initialState = {
@@ -44,6 +45,19 @@ const authSlice = createSlice({
             state.error = null;
         },
         [signUpAction.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+        //editProfileAction
+        [editProfileAction.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [editProfileAction.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+        },
+        [editProfileAction.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },

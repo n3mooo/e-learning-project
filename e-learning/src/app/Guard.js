@@ -14,7 +14,6 @@ const checkAuth = () => {
     if (!localStorage.getItem("token")) {
         return true;
     }
-    alert("Please Login");
     return false;
 };
 
@@ -22,7 +21,6 @@ const checkLogin = () => {
     if (localStorage.getItem("token")) {
         return true;
     }
-    alert("Please Login");
     return false;
 };
 

@@ -1,25 +1,26 @@
+import { Alert } from "common/components/Alert";
 import { fetchProfileAction } from "features/authentication/action";
 import { lazy, Suspense, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { AuthRoute } from "./Guard";
+import { AuthRoute, PrivateRoute } from "./Guard";
 
 const Header = lazy(() => import("common/components/Header"));
 const Footer = lazy(() => import("common/components/Footer"));
 const SignIn = lazy(() => import("features/authentication/pages/SignIn"));
 const SignUp = lazy(() => import("features/authentication/pages/SignUp"));
 const Home = lazy(() => import("features/home/pages/Home"));
-const Course = lazy(() => import("features/home/components/Courses"));
+const Courses = lazy(() => import("features/home/components/Courses"));
 const Detail = lazy(() => import("features/home/components/CourseDetail"));
 const Cart = lazy(() => import("features/cart/pages/Cart"));
-const User = lazy(() => import("features/user/pages/User"));
+const Profile = lazy(() => import("features/profile/pages/Profile"));
 
 function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchProfileAction());
+        localStorage.getItem("token") && dispatch(fetchProfileAction());
     });
 
     return (
@@ -37,12 +38,16 @@ function App() {
                     </div>
                 }>
                 <Header />
+                <Alert />
                 <Switch>
                     <Route path='/' component={Home} exact></Route>
-                    <Route path='/course' component={Course} redirectPath='/'></Route>
+                    <PrivateRoute
+                        path='/courses'
+                        component={Courses}
+                        redirectPath='/signin'></PrivateRoute>
                     <Route path='/detail/:alias' component={Detail} redirectPath='/'></Route>
                     <Route path='/cart' component={Cart} redirectPath='/'></Route>
-                    <Route path='/user' component={User} redirectPath='/'></Route>
+                    <Route path='/profile' component={Profile} redirectPath='/'></Route>
                     <AuthRoute path='/signin' component={SignIn} redirectPath='/' />
                     <AuthRoute path='/signup' component={SignUp} redirectPath='/' />
 

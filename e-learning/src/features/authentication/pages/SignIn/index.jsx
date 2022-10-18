@@ -124,7 +124,18 @@ function SignIn() {
                                     style={{ animationDelay: "300ms" }}
                                     type='submit'
                                     disabled={loading}>
-                                    {loading ? <Spinner animation='border' /> : "Submit"}
+                                    {loading ? (
+                                        <Spinner
+                                            animation='border'
+                                            style={{
+                                                width: "1rem",
+                                                height: "1rem",
+                                                borderWidth: "0.2em",
+                                            }}
+                                        />
+                                    ) : (
+                                        "Submit"
+                                    )}
                                 </Button>
                                 {error && (
                                     <Form.Text

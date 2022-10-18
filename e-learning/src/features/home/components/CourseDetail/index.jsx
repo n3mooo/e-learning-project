@@ -2,7 +2,8 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faAngleRight, faCalendarAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import homeSlice from "features/home/homeSlice";
+import { subscribeCourseAction } from "features/cart/action";
+import cartSlice from "features/cart/cartSlice";
 import React, { useEffect } from "react";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +13,28 @@ import styles from "./style.module.css";
 function CourseDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const profile = useSelector((state) => state.auth.profile);
     const courseDetail = useSelector((state) => state.home.courseDetail);
-    const cart = useSelector((state) => state.home.cart);
+    const cart = useSelector((state) => state.cart.cart);
+    const { loading } = useSelector((state) => state.cart);
+
+    const foundCourse = cart?.findIndex((x) => x.maKhoaHoc === courseDetail.maKhoaHoc);
 
     const addToCart = (item) => {
-        dispatch(homeSlice.actions.updateCart(item));
+        dispatch(cartSlice.actions.updateCart(item));
+    };
+
+    const removeFromCart = (item) => {
+        dispatch(cartSlice.actions.updateCart(item));
+    };
+
+    const subscribeNow = async () => {
+        const data = {
+            maKhoaHoc: courseDetail.maKhoaHoc,
+            taiKhoan: profile.taiKhoan,
+        };
+        await dispatch(subscribeCourseAction(data));
+        foundCourse !== -1 && removeFromCart(courseDetail);
     };
 
     useEffect(() => {
@@ -46,7 +64,7 @@ function CourseDetail() {
                     </div>
                     <h3 className={clsx(styles.title, "fadeInUp")}>{courseDetail.tenKhoaHoc}</h3>
                     <p
-                        className='fadeInUP'
+                        className='fadeInUp'
                         style={{
                             animationDelay: "100ms",
                             marginBottom: ".5rem",
@@ -55,7 +73,7 @@ function CourseDetail() {
                         {courseDetail.moTa}
                     </p>
                     <div
-                        className='d-flex align-items-center gap-4 fadeInUP'
+                        className='d-flex align-items-center gap-4 fadeInUp'
                         style={{ marginBottom: "0.5rem", animationDelay: "200ms" }}>
                         <div className={clsx("d-flex align-items-center", styles.rate)}>
                             <span className='me-1'>5.0</span>
@@ -110,7 +128,29 @@ function CourseDetail() {
                                         Add to cart
                                     </Button>
                                 )}
-                                <Button className='btn btnOutline'>Buy now</Button>
+                                <Button
+                                    className='btn btnOutline'
+                                    onClick={async () => {
+                                        if (!localStorage.getItem("token")) {
+                                            history.push("/signin");
+                                        } else {
+                                            await subscribeNow();
+                                        }
+                                    }}
+                                    disabled={loading}>
+                                    {loading ? (
+                                        <Spinner
+                                            animation='border'
+                                            style={{
+                                                width: "1rem",
+                                                height: "1rem",
+                                                borderWidth: "0.2em",
+                                            }}
+                                        />
+                                    ) : (
+                                        "Register now"
+                                    )}
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -118,8 +158,6 @@ function CourseDetail() {
             </>
         );
     };
-
-    const foundCourse = cart?.findIndex((x) => x.maKhoaHoc === courseDetail.maKhoaHoc);
 
     return (
         <section className={styles.detail}>

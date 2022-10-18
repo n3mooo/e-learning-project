@@ -4,14 +4,15 @@
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
+.navBrand {
+    width: 400px;
+}
+
 .navBrand img {
     width: 125px;
     height: 45.45px;
     object-fit: cover;
-}
-
-.offCanvasBody .navLink:first-child {
-    margin-right: 94px;
+    cursor: pointer;
 }
 
 .navLink {
@@ -54,10 +55,6 @@
     box-shadow: none;
 }
 
-.navDropdown {
-    width: 100%;
-}
-
 .navDropdown a::after {
     display: none !important;
 }
@@ -82,19 +79,44 @@
     width: 100%;
 }
 
-.cartToggle {
-    display: none;
+.navBarBox {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-58%);
+}
+
+.offCanvasBody {
+    align-items: center;
 }
 
 .cart {
     position: relative;
     max-width: 200px;
+    padding: 0.25rem 0.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.cart a {
+    position: relative;
+    padding: 0 !important;
+}
+
+.cart a span {
+    top: -5px;
+    right: -5px;
+}
+
+.iconCart {
+    font-size: 1.5rem;
 }
 
 .amountCart {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -3px;
+    right: 3px;
     background-color: #f06a2b;
     font-size: 0.7rem;
     width: 1rem;
@@ -137,11 +159,20 @@
     color: rgba(0, 0, 0, 0.7);
 }
 
+.visible {
+    display: none !important;
+}
+
 @media screen and (max-width: 992px) {
+    .navBrand {
+        width: auto;
+    }
+
     .offCanvasBody {
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
+        align-items: flex-start;
         padding: 24px;
     }
 
@@ -170,29 +201,39 @@
         width: 100%;
     }
 
-    .navDropdown,
-    .navDropdown.cart {
+    .visible {
+        display: flex !important;
+    }
+
+    .invisible {
         display: none !important;
     }
 
-    .navToggle,
-    .navDropdown.cartToggle {
+    .navToggle {
         display: block !important;
     }
 
+    .navBarBox {
+        right: 0;
+    }
+
     .amountCart {
-        top: -20%;
-        right: -25%;
+        top: -1px;
+        right: 10%;
         font-size: 0.6rem;
         width: 0.9rem;
         height: 0.9rem;
         line-height: 0.9rem;
     }
+
+    .w100 {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 576px) {
     .navDropdown div:nth-child(2) {
-        right: -288%;
+        right: -95%;
         min-width: 180px;
     }
 }
