@@ -45,7 +45,7 @@ function Footer() {
                         </div>
                     </Col>
                     <Col xs={12} sm={6} md={3} className='text-center'>
-                        <img src={hand} alt='' style={{ width: "80%" }} />
+                        <img src={hand} alt='' />
                     </Col>
                 </Row>
             </Container>

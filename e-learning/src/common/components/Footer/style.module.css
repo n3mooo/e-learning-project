@@ -2,6 +2,7 @@
     padding: 3rem 0;
     position: relative;
     background-color: #000;
+    overflow: hidden;
 }
 .footer .footerLogo {
     width: 50%;
