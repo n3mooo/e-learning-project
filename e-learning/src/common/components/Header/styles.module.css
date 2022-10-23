@@ -1,0 +1,334 @@
+.navBar {
+    height: 10vh;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navBrand {
+    width: 400px;
+}
+
+.navBrand img {
+    width: 125px;
+    height: 45.45px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.navLink {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.navLink a {
+    display: block;
+    color: #000;
+    font-size: 1rem;
+    line-height: 22px;
+    font-weight: 400;
+    user-select: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 0;
+    transition: 0.5s all;
+}
+
+.navLink a.active {
+    border-bottom: 2px solid #5627ff;
+    color: #5627ff !important;
+}
+
+.navLink a:hover {
+    color: #5627ff;
+}
+
+.btnToggle {
+    box-shadow: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.btnToggle:focus {
+    box-shadow: none;
+}
+
+.navDropdown a::after {
+    display: none !important;
+}
+
+.navDropdown div:nth-child(2) {
+    left: unset !important;
+    right: 0;
+    border-radius: 1rem;
+    min-width: 200px;
+}
+
+.navDropdown div:nth-child(2) a {
+    font-size: 0.95rem;
+}
+
+.navDropdown div:nth-child(2) a:hover {
+    background-color: transparent !important;
+}
+
+.navToggle {
+    display: none;
+    width: 100%;
+}
+
+.navBarBox {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-58%);
+}
+
+.offCanvasBody {
+    align-items: center;
+}
+
+.cart {
+    position: relative;
+    max-width: 200px;
+    padding: 0.25rem 0.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.cart a {
+    position: relative;
+}
+
+.cart a span {
+    top: -5px;
+    right: -5px;
+}
+
+.iconCart {
+    font-size: 1.5rem;
+}
+
+.amountCart {
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    background-color: #f06a2b;
+    font-size: 0.7rem;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.cart .btnCart {
+    padding: 8px 20px;
+    font-size: 0.875rem !important;
+    min-height: 22px;
+    font-weight: 700 !important;
+}
+
+.itemCart img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.itemCart .text {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.itemCart .text h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: pre-wrap;
+    margin-bottom: 2px;
+}
+
+.itemCart .text span {
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.visible {
+    display: none !important;
+}
+
+.searchWrapper {
+    display: flex;
+    flex-grow: 1;
+    max-width: 256px;
+    min-width: 0;
+}
+
+.customSearchWrapper {
+    position: absolute;
+    right: 87%;
+    width: 100%;
+    max-width: 220px;
+}
+
+.searchControl {
+    flex-grow: 1;
+    border-radius: 22px;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    padding-left: 2.4rem;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.searchControl:focus,
+.searchControl:hover {
+    color: #000;
+    background-color: #fff;
+    border: 2px solid #000;
+    outline: 0;
+    box-shadow: none;
+}
+
+.iconSearch {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    color: rgba(5, 6, 15, 0.32);
+    pointer-events: none;
+    transition: color 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+    transform: translateX(70%);
+}
+
+.formGroup:hover .iconSearch,
+.searchControl:focus + .iconSearch {
+    color: #000 !important;
+}
+
+.gapNav {
+    gap: 50px;
+}
+
+.gap15 {
+    gap: 15px !important;
+}
+
+@media screen and (max-width: 1400px) {
+    .justifyContentNav {
+        justify-content: end !important;
+        padding-right: 240px;
+    }
+
+    .customSearchWrapper {
+        right: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .justifyContentNav {
+        padding-right: 190px;
+    }
+    .customSearchWrapper {
+        right: 118%;
+        max-width: 135px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navBrand {
+        width: auto;
+    }
+
+    .offCanvasBody {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 24px;
+    }
+
+    .offCanvasHeader {
+        padding: 24px;
+        justify-content: flex-end;
+    }
+
+    .offCanvasBody .navLink:first-child {
+        margin-right: 0;
+    }
+
+    .navLink {
+        margin-left: 0 !important;
+        justify-content: unset !important;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    .navLink a {
+        font-weight: 700;
+        border: none !important;
+    }
+
+    .navLink .btnNav {
+        width: 100%;
+    }
+
+    .visible {
+        display: flex !important;
+    }
+
+    .invisible {
+        display: none !important;
+    }
+
+    .navToggle {
+        display: block !important;
+    }
+
+    .navBarBox {
+        right: 0;
+    }
+
+    .cart a {
+        padding: 0 !important;
+    }
+
+    .amountCart {
+        top: -1px;
+        right: 10%;
+        font-size: 0.6rem;
+        width: 0.9rem;
+        height: 0.9rem;
+        line-height: 0.9rem;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+    .gapNav {
+        gap: 20px;
+    }
+
+    .justifyContentNav {
+        padding-right: 0;
+    }
+    .customSearchWrapper {
+        top: -55%;
+        right: 0;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navDropdown div:nth-child(2) {
+        right: -95%;
+        min-width: 180px;
+    }
+}

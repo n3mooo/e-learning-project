@@ -1,0 +1,36 @@
+.footer {
+    padding: 3rem 0;
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+}
+.footer .footerLogo {
+    width: 50%;
+}
+
+.text span {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+    min-height: 22px !important;
+    background-color: transparent;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn:hover {
+    background-color: transparent !important;
+}
+
+.iconBrand {
+    font-size: 18px;
+    margin-right: 10px;
+}

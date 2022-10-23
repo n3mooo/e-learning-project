@@ -1,0 +1,224 @@
+.courseSection {
+    padding: 3rem 0;
+    position: relative;
+}
+
+.bodySection .topics {
+    padding: 1rem;
+    background-color: #fff;
+}
+.tabContent {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.topics span,
+.tabContent span {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 0.875rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f3f3f3;
+    margin-bottom: 0.75rem;
+    padding-bottom: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.topicItem a {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: transparent !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    transition: 0s all;
+    margin-bottom: 0.5rem;
+    transition: 0.2s all;
+}
+
+.topicItem a:hover {
+    background-color: #f3f3f3 !important;
+    border-radius: 0.8rem;
+}
+
+.topicItem a.active {
+    font-weight: 600;
+    background-color: #000 !important;
+    color: #f8db46 !important;
+    border-radius: 0.8rem;
+}
+
+.tabContent {
+    padding: 0.9rem 1.5rem 1.5rem;
+}
+
+.card {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
+    border: none;
+    transition: 0.2s all;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.flag::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    display: block;
+    z-index: 1;
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #fff 76%);
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+    opacity: 0;
+}
+
+.flag:hover::after {
+    opacity: 1;
+}
+
+.imgCard {
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    overflow: hidden;
+}
+
+.cardBody {
+    padding: 1rem;
+}
+
+.cardSubTitle p {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 5px;
+    cursor: default;
+}
+
+.cardTitle {
+    font-family: Inter, sans-serif;
+    color: #05060f;
+    line-height: 1.4em;
+    letter-spacing: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    cursor: default;
+}
+
+.cardDesc {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: rgba(5, 6, 15, 0.6);
+    font-size: 0.875rem;
+    line-height: 24px;
+    height: 50px;
+    text-overflow: ellipsis;
+}
+
+.cartAction {
+    padding: 0 1rem;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    z-index: 2;
+}
+
+.card:hover .cartAction {
+    transform: translateY(-50%);
+}
+
+.cardBtn {
+    padding: 8px 20px;
+    font-size: 0.875rem !important;
+    min-height: 22px;
+}
+
+.imgSection {
+    animation: float 2s infinite;
+}
+
+.cardWrap {
+    max-height: 85vh;
+    align-content: flex-start;
+    overflow: auto;
+    padding-bottom: 1rem;
+}
+
+.cardWrap::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+}
+
+.cardWrap::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+.cardWrap::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 50px;
+}
+
+.icon1 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80px;
+    height: auto;
+    transform: rotate(50deg);
+    animation: float 2s infinite;
+}
+
+.icon2 {
+    position: absolute;
+    top: 5%;
+    right: 15%;
+    width: 80px;
+    height: auto;
+    transform: rotate(20deg);
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .imgSection {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    .icon1,
+    .icon2 {
+        display: none;
+    }
+}

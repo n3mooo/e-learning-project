@@ -1,0 +1,73 @@
+.contactSection {
+    padding: 3rem 0;
+    position: relative;
+    background-color: #f3f3f3;
+}
+
+.imgSection {
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+}
+
+.imgSection img {
+}
+
+.form h2 {
+    margin-bottom: 1rem !important;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 38px;
+}
+
+.form label {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.form input,
+.form textarea {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: inherit;
+    line-height: 28px;
+    width: 100%;
+    text-overflow: ellipsis;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    color: #000;
+    background: #fff;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 10px;
+}
+
+.form input:hover,
+.form input:focus,
+.form textarea:hover,
+.form textarea:focus {
+    border-color: #000;
+    box-shadow: none;
+}
+
+.btnPrimary {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 700;
+    height: 44px;
+    border-radius: 10px;
+    padding: 0 16px;
+}
+
+.btnFormControl {
+    margin: 32px 0 0;
+    width: 100%;
+    background-color: #5627ff;
+    color: #fff;
+}
+
+.btnFormControl:hover {
+    background-color: #663bff !important;
+}
