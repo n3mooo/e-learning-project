@@ -1,0 +1,19 @@
+p {
+    transition: all 0.5s;
+}
+.readmore {
+    background-color: #448aff;
+    padding:  8px 20px;
+    margin-top: 20px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 20px;
+    color: #fff;
+    transition: all 0.5s;
+    border: 2px solid #448aff;
+    cursor: pointer;
+}
+.readmore:hover {
+    background-color: #fff;
+    color: #448aff;
+}

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+* {
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+.popup_success {
+    display: flex;
+    width: 100%;
+    background-color: rgba(100, 99, 99, 0.267);
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+.popup_success.disable {
+    display: none;
+    transition: all 0.5s;
+}
+.popup_success .content {
+    width: 30%;
+    background-color: #fff;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    animation-name: zoomIn;
+    animation-duration: 0.5s;
+
+}
+.popup_success .content .header svg {
+    font-size: 80px;
+    color: #00c853;
+}
+.popup_success .content .main h2 {
+    margin: 20px auto;
+    font-size: 20px;
+    color: #00c853;
+    font-weight: 500;
+    text-align: center;
+}
+.popup_success .content .footer button {
+    padding: 8px 30px;
+    background-color: #00c853;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: #fff;
+    transition: all 0.5s;
+    font-size: 20px;
+    font-weight: 500;
+}
+.popup_success .content .footer button:hover {
+    border: 2px solid #00c853;
+    color: #00c853;
+    background-color: #fff;
+}
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3,.3,.3);
+        transform: scale3d(.3,.3,.3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+@media screen and (max-width: 768px) {
+    .popup_success .content {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .popup_success .content {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .popup_success .content {
+        width: 50%;
+    }
+}
