@@ -283,7 +283,7 @@ function Course() {
                             onSelect={async (k) => {
                                 setKey(k);
                                 if (k !== "all") {
-                                    fetchCoursesOfTopic(k);
+                                    await fetchCoursesOfTopic(k);
                                 }
                             }}
                             style={{ border: "none" }}>

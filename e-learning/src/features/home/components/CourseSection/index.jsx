@@ -21,7 +21,7 @@ function CourseSection(props) {
     const coursesOfTopic = useSelector((state) => state.home.coursesOfTopic);
     const cart = useSelector((state) => state.cart.cart);
 
-    const fetchCoursesOfTopic = async () => {
+    const fetchCoursesOfTopic = async (key) => {
         await dispatch(fetchCoursesOfTopicAction(key));
     };
 
@@ -116,7 +116,7 @@ function CourseSection(props) {
     };
 
     useEffect(() => {
-        fetchCoursesOfTopic();
+        fetchCoursesOfTopic(key);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -134,7 +134,12 @@ function CourseSection(props) {
                     </p>
                 </div>
                 <div className={styles.bodySection}>
-                    <Tab.Container activeKey={key} onSelect={(k) => setKey(k)}>
+                    <Tab.Container
+                        activeKey={key}
+                        onSelect={(k) => {
+                            setKey(k);
+                            fetchCoursesOfTopic(k);
+                        }}>
                         <Row className='g-3'>
                             <Col xs={12} md={3}>
                                 <Nav

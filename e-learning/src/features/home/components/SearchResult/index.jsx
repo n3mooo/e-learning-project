@@ -4,10 +4,11 @@ import clsx from "clsx";
 import cartSlice from "features/cart/cartSlice";
 import { fetchCourseDetailAction, fetchCoursesAction } from "features/home/action";
 import React, { useEffect } from "react";
-import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styles from "./style.module.css";
+import emptyCourse from "assets/value-prop-inspire-v3.jpg";
 
 function SearchResult() {
     const history = useHistory();
@@ -36,15 +37,26 @@ function SearchResult() {
     //render all course
     const renderCourse = () => {
         return (
-            <Row className={clsx("fadeInUp", styles.tabContent)}>
-                {!courses ? (
-                    <div
-                        style={{
-                            width: "100%",
-                            textAlign: "center",
-                            paddingTop: "2rem",
-                        }}>
-                        <Spinner animation='border' />
+            <Row className={clsx("fadeInUp", styles.wrapper)}>
+                {resultSearch?.length === 0 ? (
+                    <div className='d-flex align-items-center justify-content-center flex-column'>
+                        <img
+                            height={100}
+                            src={emptyCourse}
+                            alt=''
+                            style={{
+                                width: 120,
+                                maxWidth: "100%",
+                                margin: "0 auto 1rem",
+                            }}
+                        />
+                        <p
+                            style={{
+                                fontWeight: 400,
+                                fontSize: ".9rem",
+                            }}>
+                            No matching results found.
+                        </p>
                     </div>
                 ) : (
                     resultSearch?.map((item, index) => {
