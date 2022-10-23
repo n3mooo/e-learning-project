@@ -118,7 +118,7 @@ function CourseSection(props) {
     useEffect(() => {
         fetchCoursesOfTopic();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [key]);
+    }, []);
 
     return (
         <section className={styles.courseSection}>

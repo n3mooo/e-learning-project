@@ -15,13 +15,15 @@ const Courses = lazy(() => import("features/home/components/Courses"));
 const Detail = lazy(() => import("features/home/components/CourseDetail"));
 const Cart = lazy(() => import("features/cart/pages/Cart"));
 const Profile = lazy(() => import("features/profile/pages/Profile"));
+const SearchResult = lazy(() => import("features/home/components/SearchResult"));
 
 function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         localStorage.getItem("token") && dispatch(fetchProfileAction());
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <BrowserRouter>
@@ -46,6 +48,7 @@ function App() {
                         component={Courses}
                         redirectPath='/signin'></PrivateRoute>
                     <Route path='/detail/:alias' component={Detail} redirectPath='/'></Route>
+                    <Route path='/search/:alias' component={SearchResult} redirectPath='/'></Route>
                     <Route path='/cart' component={Cart} redirectPath='/'></Route>
                     <Route path='/profile' component={Profile} redirectPath='/'></Route>
                     <AuthRoute path='/signin' component={SignIn} redirectPath='/' />

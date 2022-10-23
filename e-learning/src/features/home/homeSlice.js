@@ -11,11 +11,17 @@ const initialState = {
     courses: null,
     coursesOfTopic: null,
     courseDetail: null,
+    keyWord: "",
 };
 
 const homeSlice = createSlice({
     name: "home",
     initialState: initialState,
+    reducers: {
+        setKeyWord(state, action) {
+            state.keyWord = action.payload;
+        },
+    },
     extraReducers: {
         [fetchTopicsAction.fulfilled]: (state, action) => {
             state.topics = action.payload;

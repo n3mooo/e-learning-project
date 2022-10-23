@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
+import { Button, Col, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
 import styles from "./styles.module.css";
 import logo from "assets/logo-3Learn.png";
@@ -7,14 +7,21 @@ import clsx from "clsx";
 import authSlice from "features/authentication/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCartShopping, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+    faBars,
+    faCartShopping,
+    faMagnifyingGlass,
+    faUserCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { fetchCourseDetailAction } from "features/home/action";
+import homeSlice from "features/home/homeSlice";
 
 function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userProfile = useSelector((state) => state.auth.profile);
     const cart = useSelector((state) => state.cart.cart);
+    const keyWord = useSelector((state) => state.home.keyWord);
 
     const fetchCourseDetail = async (id) => {
         await dispatch(fetchCourseDetailAction(id));
@@ -31,6 +38,15 @@ function Header() {
         dispatch(authSlice.actions.logOut(null));
 
         goHome();
+    };
+
+    const handleChange = (e) => {
+        dispatch(homeSlice.actions.setKeyWord(e.target.value));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        history.push("/search/" + keyWord);
     };
 
     const renderUserInfo = () => {
@@ -151,7 +167,9 @@ function Header() {
                         </span>
                     </>
                 }
-                className={clsx(styles.navDropdown, styles.cart)}>
+                className={clsx(styles.navDropdown, styles.cart, {
+                    "px-0": !localStorage.getItem("token"),
+                })}>
                 {cart?.length === 0 ? (
                     <NavDropdown.Item to=''>Your cart is empty</NavDropdown.Item>
                 ) : (
@@ -210,29 +228,36 @@ function Header() {
                     </Navbar.Brand>
                 </Col>
 
-                <Navbar.Offcanvas id='narBar' placement='end' style={{ width: 300 }}>
+                <Navbar.Offcanvas
+                    id='narBar'
+                    placement='end'
+                    className='bg-light'
+                    style={{ width: 300 }}>
                     <Offcanvas.Header
                         closeButton
                         className={styles.offCanvasHeader}></Offcanvas.Header>
                     <Offcanvas.Body className={styles.offCanvasBody}>
                         <Col lg={8} className={styles.w100}>
-                            <Nav className={clsx("justify-content-center w-100", styles.navLink)}>
+                            <Nav
+                                className={clsx("justify-content-center w-100", styles.navLink, {
+                                    [styles.justifyContentNav]: !localStorage.getItem("token"),
+                                })}>
                                 <NavLink
-                                    activeClassName={styles.active}
-                                    style={{ width: 65, textAlign: "center" }}
+                                    activeClassName={(styles.active, "text-lg-center text-start")}
+                                    style={{ width: 65 }}
                                     to='/'
                                     exact>
                                     Home
                                 </NavLink>
                                 <NavLink
                                     activeClassName={styles.active}
-                                    style={{ width: 65, textAlign: "center" }}
+                                    style={{ width: 65 }}
                                     to='/courses'>
                                     Courses
                                 </NavLink>
                                 <NavLink
                                     activeClassName={styles.active}
-                                    style={{ width: 65, textAlign: "center" }}
+                                    style={{ width: 65 }}
                                     to='/contact'>
                                     Contact
                                 </NavLink>
@@ -241,8 +266,41 @@ function Header() {
 
                         <Col lg={4} className={styles.w100}>
                             <Nav
-                                className={clsx("justify-content-end", styles.navLink)}
-                                style={{ width: "100%", gap: 12, height: "fit-content" }}>
+                                className={clsx(
+                                    "justify-content-end w-100 position-relative",
+                                    styles.navLink,
+                                    styles.gapNav,
+                                    {
+                                        [styles.gap15]: !localStorage.getItem("token"),
+                                    }
+                                )}>
+                                {/* search */}
+                                <div
+                                    className={clsx(styles.searchWrapper, {
+                                        [styles.customSearchWrapper]:
+                                            !localStorage.getItem("token"),
+                                    })}>
+                                    <Form className='d-flex w-100' onSubmit={handleSubmit}>
+                                        <Form.Group
+                                            className={clsx(
+                                                "d-flex align-items-center w-100 position-relative",
+                                                styles.formGroup
+                                            )}>
+                                            <Form.Control
+                                                name='keyWord'
+                                                type='text'
+                                                className={styles.searchControl}
+                                                placeholder='Search course'
+                                                value={keyWord}
+                                                onChange={handleChange}
+                                            />
+                                            <FontAwesomeIcon
+                                                icon={faMagnifyingGlass}
+                                                className={styles.iconSearch}
+                                            />
+                                        </Form.Group>
+                                    </Form>
+                                </div>
                                 {renderUserInfo()}
                             </Nav>
                         </Col>
