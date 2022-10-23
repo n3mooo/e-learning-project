@@ -160,7 +160,7 @@ function CoursesManage() {
       dispatch(deleteCourse(id));
       setTimeout(() => {
         fetchCourseListAction();
-      }, 1000);
+      }, 3000);
     }
   };
   useEffect(() => {

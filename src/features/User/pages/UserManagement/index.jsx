@@ -65,7 +65,7 @@ function UserManagement() {
       dispatch(deleteUser(e));
     setTimeout(() => {
       fetchUserListAction();
-    }, 1000);
+    }, 3000);
     }
     
   };
