@@ -1,0 +1,49 @@
+.background {
+  background-image: url(/src/assets/image/background-2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.background h1 {
+  padding-top: 20px;
+  margin-left: 20px;
+  font-size: 30px;
+}
+.background h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.background .content {
+  padding: 20px;
+  margin: 0 auto 50px;
+  width: 80%;
+  overflow: hidden;
+}
+
+
+.myTable th {
+  text-align: center !important;
+  background: #26282b !important;
+  color: #fff !important;
+}
+.myTable tbody {
+  text-align: center !important;
+  background-color: #fff;
+}
+
+.myTable ul {
+  background-color: #fff;
+  margin: 0 !important;
+  padding: 10px 0;
+  border-radius: 0 0 12px 12px;
+}
+@media screen and (max-width:992px) {
+  .background .content {
+    width: 90%;
+  }
+  .myTable {
+    overflow-x: auto !important;
+  }
+}

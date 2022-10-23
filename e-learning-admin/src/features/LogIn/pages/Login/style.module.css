@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+.background {
+  /* background: linear-gradient(to top, #c471f5 0%, #fa71cd 100%); */
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(/src/assets/image/background-3.jpg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.background .container {
+  width: 80%;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.background .left {
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.background .right {
+  width: 60%;
+  background-image: url(/src/assets/image/cybersoft.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+.background .right .greeting {
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  font-size: 50px;
+  transform: translate(150%, 300%);
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  font-family: "Great Vibes", cursive;
+}
+.background h1 {
+  margin: 0;
+  padding: 50px 0 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 40px;
+}
+.background .form {
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 30px 30px 50px;
+}
+.background .form .input {
+  width: 80%;
+  margin: 0 auto 12px;
+  padding: 10px 12px;
+  outline: none;
+  border: 2px solid #f06292;
+  background-color: #fff;
+  border-radius: 20px;
+  color: #f06292;
+  font-weight: 700;
+}
+.background .form .input:focus {
+  background-color: #e0e0e0;
+  transition: all 1s;
+}
+.background .form .input::placeholder {
+  color: #f06292;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.background .form .img {
+  display: flex;
+  margin: 50px auto;
+  justify-content: center;
+  align-items: center;
+}
+.background .form .img .sample {
+  width: 50%;
+  margin: 20px auto;
+  overflow: hidden;
+}
+.background .form .btn {
+  width: 80%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: #fff;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #f06292;
+  border: 2px solid #f06292;
+  outline: none;
+  transition: all 0.5s;
+}
+.background .form .btn:hover {
+  transform: scale(1.05);
+  background-color: #fff;
+  color: #f06292;
+}
+.error {
+  width: 80%;
+  margin: 0 auto 12px;
+  color: red;
+  text-align: left;
+  font-size: 16px;
+}
+.errLogin {
+  margin-bottom: 12px;
+  color: red;
+}
+
+@media screen and (max-width: 768px) {
+  .background .container .left {
+    width: 100%;
+  }
+  .background .container .left form {
+    width: 100%;
+  }
+  .background .container .right {
+    width: 0%;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width: 992px) {
+  .background .container {
+    width: 60%;
+  }
+  .background .container .left {
+    width: 100%;
+  }
+  .background .container .left form {
+    width: 100%;
+  }
+  .background .container .right {
+    width: 0%;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .background .container {
+    width: 90%;
+  }
+  .background .container .left {
+    width: 45%;
+  }
+  .background .container .left form {
+    width: 100%;
+  }
+  .background .container .right {
+    width: 55%;
+  }
+  .background .right .greeting {
+    transform: translate(100%, 300%);
+  }
+}
