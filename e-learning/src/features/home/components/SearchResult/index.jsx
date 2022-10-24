@@ -2,8 +2,8 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import cartSlice from "features/cart/cartSlice";
-import { fetchCourseDetailAction, fetchCoursesAction } from "features/home/action";
-import React, { useEffect } from "react";
+import { fetchCourseDetailAction } from "features/home/action";
+import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -21,10 +21,6 @@ function SearchResult() {
     const resultSearch = courses?.filter((item) =>
         item.tenKhoaHoc.toLowerCase().trim().includes(keyWord)
     );
-
-    const fetchCourses = async () => {
-        await dispatch(fetchCoursesAction());
-    };
 
     const fetchCourseDetail = async (id) => {
         await dispatch(fetchCourseDetailAction(id));
@@ -129,11 +125,6 @@ function SearchResult() {
             </Row>
         );
     };
-
-    useEffect(() => {
-        fetchCourses();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <section className={styles.search}>

@@ -1,5 +1,6 @@
 import { Alert } from "common/components/Alert";
 import { fetchProfileAction } from "features/authentication/action";
+import { fetchCoursesAction, fetchTopicsAction } from "features/home/action";
 import { lazy, Suspense, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -20,8 +21,18 @@ const SearchResult = lazy(() => import("features/home/components/SearchResult"))
 function App() {
     const dispatch = useDispatch();
 
+    const fetchTopics = async () => {
+        await dispatch(fetchTopicsAction());
+    };
+
+    const fetchCourses = async () => {
+        await dispatch(fetchCoursesAction());
+    };
+
     useEffect(() => {
         localStorage.getItem("token") && dispatch(fetchProfileAction());
+        fetchTopics();
+        fetchCourses();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

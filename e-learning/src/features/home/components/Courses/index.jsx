@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Container, Row, Spinner, Tab, Tabs } from "react-bootstrap";
 import styles from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    fetchCourseDetailAction,
-    fetchCoursesAction,
-    fetchCoursesOfTopicAction,
-    fetchTopicsAction,
-} from "features/home/action";
+import { fetchCourseDetailAction, fetchCoursesOfTopicAction } from "features/home/action";
 import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
@@ -26,14 +21,6 @@ function Course() {
 
     const fetchCoursesOfTopic = async (k) => {
         await dispatch(fetchCoursesOfTopicAction(k));
-    };
-
-    const fetchTopics = async () => {
-        await dispatch(fetchTopicsAction());
-    };
-
-    const fetchCourses = async () => {
-        await dispatch(fetchCoursesAction());
     };
 
     const fetchCourseDetail = async (id) => {
@@ -250,12 +237,6 @@ function Course() {
             );
         });
     };
-
-    useEffect(() => {
-        fetchTopics();
-        fetchCourses();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <section className={styles.course}>
