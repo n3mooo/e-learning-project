@@ -243,20 +243,29 @@ function Header() {
                                     [styles.justifyContentNav]: !localStorage.getItem("token"),
                                 })}>
                                 <NavLink
-                                    activeClassName={(styles.active, "text-lg-center text-start")}
+                                    activeClassName={clsx(
+                                        styles.active,
+                                        "text-lg-center text-start"
+                                    )}
                                     style={{ width: 65 }}
                                     to='/'
                                     exact>
                                     Home
                                 </NavLink>
                                 <NavLink
-                                    activeClassName={styles.active}
+                                    activeClassName={clsx(
+                                        styles.active,
+                                        "text-lg-center text-start"
+                                    )}
                                     style={{ width: 65 }}
                                     to='/courses'>
                                     Courses
                                 </NavLink>
                                 <NavLink
-                                    activeClassName={styles.active}
+                                    activeClassName={clsx(
+                                        styles.active,
+                                        "text-lg-center text-start"
+                                    )}
                                     style={{ width: 65 }}
                                     to='/contact'>
                                     Contact
